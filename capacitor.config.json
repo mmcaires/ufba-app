@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "ufba-app",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}

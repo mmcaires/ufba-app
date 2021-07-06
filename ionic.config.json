@@ -1,0 +1,7 @@
+{
+  "name": "ufba-app",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
