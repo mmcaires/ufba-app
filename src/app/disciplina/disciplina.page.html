@@ -1,0 +1,51 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button [text]="getBackButtonText()" defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Disciplina</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content fullscreen>
+  <ion-list [formGroup]="form">
+    <ion-item>
+      <ion-label position="floating">Código</ion-label>
+      <ion-input type="text" formControlName="codigo" autofocus></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Nome</ion-label>
+      <ion-input type="text" formControlName="nome" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Professor</ion-label>
+      <ion-input type="text" formControlName="professor" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Carga Horária</ion-label>
+      <ion-input type="number" formControlName="cargaHoraria" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Nota</ion-label>
+      <ion-input type="number"  formControlName="nota" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Carga Horária: {{rangeCh | number}}</ion-label>
+      <ion-range min="0" max="100" step="1" snaps color="primary" [(ngModel)]="rangeCh" formControlName="cargaHoraria" (ionChange)="changeCargaHoraria()">
+        <ion-icon slot="start" color="primary"   name="remove-circle"></ion-icon>
+        <ion-icon slot="end"   color="primary"   name="add-circle"></ion-icon>
+      </ion-range>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Nota: {{rangeNota/10 | number:'1.1-1'}}</ion-label>
+      <ion-range min="0" max="100" step="1" snaps color="primary" [(ngModel)]="rangeNota" formControlName="nota" (ionChange)="changeNota()">
+        <ion-icon slot="start" color="primary"   name="remove-circle"></ion-icon>
+        <ion-icon slot="end"   color="primary"   name="add-circle"></ion-icon>
+      </ion-range>
+    </ion-item>
+  </ion-list>
+</ion-content>
+<ion-footer>
+    <ion-button (click)="salvar()" disabled="{{form.invalid}}" color="primary">Salvar</ion-button>
+    <ion-button (click)="remover()" *ngIf="disciplina!=null" color="danger">Remover</ion-button>
+    <ion-button (click)="cancelar()" color="warning">Cancelar</ion-button>
+</ion-footer>

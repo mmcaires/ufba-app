@@ -7,6 +7,14 @@ const routes: Routes = [
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
   {
+    path: 'disciplina',
+    loadChildren: () => import('./disciplina/disciplina.module').then( m => m.DisciplinaPageModule)
+  },
+  {
+    path: 'disciplina/:codigo',
+    loadChildren: () => import('./disciplina/disciplina.module').then( m => m.DisciplinaPageModule)
+  },
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
