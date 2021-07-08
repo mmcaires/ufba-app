@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import { DisciplinaService } from './../service/disciplina.service';
 import { Component, OnInit } from '@angular/core';
 import { ModalController, ToastController } from '@ionic/angular';
@@ -17,11 +16,12 @@ export class DisciplinaPage implements OnInit {
   disciplina: Disciplina;
   codigo: string;
 
+  regex = /[À-üA-Za-z]+$/i;
   form = new FormGroup({
     id: new FormControl(''),
     codigo: new FormControl('',[Validators.minLength(3),Validators.maxLength(255),Validators.required]),
-    nome: new FormControl('',[Validators.minLength(3),Validators.maxLength(255),Validators.required,Validators.pattern('^[a-zA-Z ]*$')]),
-    professor: new FormControl('',[Validators.minLength(3),Validators.maxLength(255),Validators.required,Validators.pattern('^[a-zA-Z ]*$')]),
+    nome: new FormControl('',[Validators.minLength(3),Validators.maxLength(255),Validators.required,Validators.pattern(this.regex)]),
+    professor: new FormControl('',[Validators.minLength(3),Validators.maxLength(255),Validators.required,Validators.pattern(this.regex)]),
     cargaHoraria: new FormControl('',[Validators.min(15),Validators.max(120),Validators.required]),
     nota: new FormControl('',[Validators.min(0),Validators.max(10),Validators.required])
   });
@@ -117,6 +117,7 @@ export class DisciplinaPage implements OnInit {
 
   cancelar() {
     this.router.navigate(['home']);
+    this.form.reset();
   }
 
   getBackButtonText() {
