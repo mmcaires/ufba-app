@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { DisciplinaService } from './../service/disciplina.service';
 import { Component, OnInit } from '@angular/core';
 import { ModalController, ToastController } from '@ionic/angular';
@@ -15,16 +16,14 @@ export class DisciplinaPage implements OnInit {
 
   disciplina: Disciplina;
   codigo: string;
-  rangeNota=0;
-  rangeCh=0;
 
   form = new FormGroup({
     id: new FormControl(''),
-    codigo: new FormControl('',Validators.required),
-    nome: new FormControl('',Validators.required),
-    professor: new FormControl('',Validators.required),
-    cargaHoraria: new FormControl('',Validators.required),
-    nota: new FormControl('',Validators.required)
+    codigo: new FormControl('',[Validators.minLength(3),Validators.maxLength(255),Validators.required]),
+    nome: new FormControl('',[Validators.minLength(3),Validators.maxLength(255),Validators.required,Validators.pattern('^[a-zA-Z ]*$')]),
+    professor: new FormControl('',[Validators.minLength(3),Validators.maxLength(255),Validators.required,Validators.pattern('^[a-zA-Z ]*$')]),
+    cargaHoraria: new FormControl('',[Validators.min(15),Validators.max(120),Validators.required]),
+    nota: new FormControl('',[Validators.min(0),Validators.max(10),Validators.required])
   });
 
   constructor(
@@ -60,8 +59,6 @@ export class DisciplinaPage implements OnInit {
       subscribe(
         (result)=>{
           this.disciplina=result[0];
-          //this.rangeNota=this.disciplina.nota*10;
-          //this.rangeCh=this.disciplina.cargaHoraria;
           this.form.setValue(this.disciplina);
         }
       );
@@ -126,14 +123,6 @@ export class DisciplinaPage implements OnInit {
     const win = window as any;
     const mode = win && win.Ionic && win.Ionic.mode;
     return mode === 'ios' ? 'Inbox' : '';
-  }
-
-  changeNota(){
-    this.form.patchValue({nota: this.rangeNota});
-  }
-
-  changeCargaHoraria(){
-    this.form.patchValue({cargaHoraria: this.rangeCh});
   }
 
 }
