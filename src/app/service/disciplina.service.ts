@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/member-ordering */
 import { Disciplina } from './../model/disciplina';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -10,7 +11,7 @@ const ENDPOINT='https://retoolapi.dev/e9NEZp/disciplina';
 })
 export class DisciplinaService {
 
-  public dataSource = new BehaviorSubject<Disciplina[]>([]);
+  private dataSource = new BehaviorSubject<Disciplina[]>([]);
   public disciplinas= this.dataSource.asObservable();
 
   constructor(private http: HttpClient) { }

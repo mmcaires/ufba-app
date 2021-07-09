@@ -1,55 +1,45 @@
-<ion-app>
-  <ion-header [translucent]="true">
-    <ion-toolbar>
-      <ion-title>
-        UFBA - Registro de Notas
-      </ion-title>
-      <ion-buttons slot="end">
-        <ion-back-button></ion-back-button>
-      </ion-buttons>
-    </ion-toolbar>
-  </ion-header>
-  <ion-content [fullscreen]="true">  
-    <ion-list>
-      <ion-item>
-        <ion-label>Disciplinas Cursadas:</ion-label>
-        <ion-badge [color]="'primary'">{{disciplinas.length| number}}</ion-badge>
-      </ion-item>
-      <ion-item>
-        <ion-label>Carga Horária Total:</ion-label>
-        <ion-badge [color]="'primary'">{{totalCH | number}}</ion-badge>
-      </ion-item>
-      <ion-item>
-        <ion-label>CR(Coeficiente de Rendimento):</ion-label>
-        <ion-badge [color]="cr>=5?'primary':'danger'">{{cr | number:'1.1-1'}}</ion-badge>
-      </ion-item>
-    </ion-list>
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      UFBA - Registro de Notas
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
 
-    <ion-item-divider>
+<ion-content [fullscreen]="true">
+  <ion-list>
+    <ion-item>
+      <ion-label>Disciplinas Cursadas:</ion-label>
+      <ion-badge class="badge" [color]="'primary'">{{disciplinas.length| number}}</ion-badge>
+    </ion-item>
+    <ion-item>
+      <ion-label>Carga Horária Total:</ion-label>
+      <ion-badge class="badge" [color]="'primary'">{{totalCH | number}}</ion-badge>
+    </ion-item>
+    <ion-item>
+      <ion-label>CR(Coeficiente de Rendimento):</ion-label>
+      <ion-badge class="badge" [color]="cr>=5?'success':'danger'">{{cr | number:'1.1-1'}}</ion-badge>
+    </ion-item>
+  </ion-list>
+  <ion-item-divider>
+    <ion-label>
+      Disciplinas
+    </ion-label>
+  </ion-item-divider>
+  <ion-list>
+    <ion-item>
+      <ion-button size size="full" [routerLink]="'/disciplina'">
+        <ion-icon name="add-circle"></ion-icon>
+        <span style="padding: 5px;">Cadastrar</span>
+      </ion-button>
+    </ion-item>
+    <ion-item *ngFor="let disciplina of disciplinas; index as position" [routerLink]="'/disciplina/'+disciplina.codigo">
       <ion-label>
-        Disciplinas
+        <h2>{{disciplina.codigo}}-{{disciplina.nome}}</h2>
+        <h3>{{disciplina.professor}}</h3>
+        <p>Carga Horária: {{disciplina.cargaHoraria}}</p>
       </ion-label>
-    </ion-item-divider>
-
-    <ion-list>
-      <ion-item>
-        <ion-button size size="full" [routerLink]="'/disciplina'">
-          <ion-icon name="add-circle"></ion-icon>
-          <span style="padding: 5px;">Cadastrar</span>
-        </ion-button>
-      </ion-item>
-      <ion-item *ngFor="let disciplina of disciplinas; index as position" [routerLink]="'/disciplina/'+disciplina.codigo">
-        <ion-label>
-          <h2>{{disciplina.codigo}}-{{disciplina.nome}}</h2>
-          <h3>{{disciplina.professor}}</h3>
-          <p>Carga Horária: {{disciplina.cargaHoraria}}</p>
-        </ion-label>
-        <ion-badge [color]="disciplina.nota>=5?'primary':'danger'">{{disciplina.nota | number:'1.1-1'}}</ion-badge>
-      </ion-item>
-    </ion-list>
-
-  </ion-content>
-  <ion-header>
-
-  </ion-header>
-</ion-app>
+      <ion-badge class="badge" [color]="disciplina.nota>=5?'success':'danger'">{{disciplina.nota | number:'1.1-1'}}</ion-badge>
+    </ion-item>
+  </ion-list>
+</ion-content>

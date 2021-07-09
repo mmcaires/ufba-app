@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/member-ordering */
 import { DisciplinaService } from './../service/disciplina.service';
 import { Component, OnInit } from '@angular/core';
-import { ModalController, ToastController } from '@ionic/angular';
+import { ToastController } from '@ionic/angular';
 import { Disciplina } from '../model/disciplina';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -13,10 +14,10 @@ import { __await } from 'tslib';
 })
 export class DisciplinaPage implements OnInit {
 
-  disciplina: Disciplina;
-  codigo: string;
+  public disciplina: Disciplina;
+  public codigo: string;
 
-  regex = /[À-üA-Za-z]+$/i;
+  private regex = /[À-üA-Za-z]+$/i;
   form = new FormGroup({
     id: new FormControl(''),
     codigo: new FormControl('',[Validators.minLength(3),Validators.maxLength(255),Validators.required]),
@@ -27,17 +28,16 @@ export class DisciplinaPage implements OnInit {
   });
 
   constructor(
-    public modalController: ModalController,
     private disciplinaService: DisciplinaService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    public toastCtrl: ToastController) {}
+    private toastCtrl: ToastController) {}
 
   async msgSucesso(msg: string) {
     const toast = await this.toastCtrl.create({
       message: msg,
       duration: 3000,
-      position: 'middle',
+      position: 'top',
       color: 'primary'
     });
     toast.present();
@@ -46,7 +46,7 @@ export class DisciplinaPage implements OnInit {
     const toast = await this.toastCtrl.create({
       message: msg,
       duration: 3000,
-      position: 'middle',
+      position: 'top',
       color: 'danger'
     });
     toast.present();

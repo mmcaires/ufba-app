@@ -1,8 +1,6 @@
-import { DisciplinaPage } from './../disciplina/disciplina.page';
 import { DisciplinaService } from './../service/disciplina.service';
 import { Disciplina } from './../model/disciplina';
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -13,9 +11,7 @@ export class HomePage implements OnInit {
   public totalCH: number;
   public cr: number;
 
-  constructor(
-    private disciplinaService: DisciplinaService,
-    public modalController: ModalController) {}
+  constructor(private disciplinaService: DisciplinaService) {}
 
   ngOnInit(){
     this.disciplinaService.atualizarDisciplinas();
